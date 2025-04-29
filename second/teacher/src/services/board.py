@@ -1,5 +1,4 @@
 from common.db import db as mongodb
-from bson import ObjectId
 
 boardCollection = mongodb['board']
 

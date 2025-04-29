@@ -1,6 +1,5 @@
 import os
 from common.db import db as mongodb
-from bson import ObjectId
 
 memberCollection = mongodb[os.getenv('DB_COLLECTION')]
 
@@ -11,7 +10,7 @@ def createMember(member: dict):
 
 def getMember(member_id: str):
     """부원 정보를 조회합니다."""
-    member = memberCollection.find_one({"_id": ObjectId(member_id)})
+    member = memberCollection.find_one({"id": member_id})
     return member if member else None
 
 def getAllMembers():
@@ -22,12 +21,12 @@ def getAllMembers():
 def updateMember(member_id: str, member: dict):
     """부원 정보를 업데이트합니다."""
     result = memberCollection.update_one(
-        {"_id": ObjectId(member_id)}, 
+        {"id": member_id}, 
         {"$set": member}
     )
     return str(member_id) if result.modified_count > 0 else None
 
 def deleteMember(member_id: str):
     """부원 정보를 삭제합니다."""
-    result = memberCollection.delete_one({"_id": ObjectId(member_id)})
+    result = memberCollection.delete_one({"id": member_id})
     return str(member_id) if result.deleted_count > 0 else None
