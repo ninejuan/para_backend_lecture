@@ -4,8 +4,6 @@ from starlette.middleware.cors import CORSMiddleware
 
 from controllers.board import router as boardController
 
-DB_URL = "이건진짜DBURL"
-
 dotenv.load_dotenv()
 
 app = FastAPI(
@@ -26,7 +24,7 @@ app.add_middleware(
 
 @app.get('/')
 def thisisroot():
-    return 'Hello this is para backend first lecture'
+    return 'Hello this is para backend second lecture'
 
 app.include_router(boardController)
 
