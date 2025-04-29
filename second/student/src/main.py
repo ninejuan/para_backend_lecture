@@ -4,8 +4,6 @@ from starlette.middleware.cors import CORSMiddleware
 
 from controllers.board import router as boardController
 
-DB_URL = "이건진짜DBURL"
-
 dotenv.load_dotenv()
 
 app = FastAPI(

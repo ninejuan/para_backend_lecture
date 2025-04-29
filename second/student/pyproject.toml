@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "second-student"
+version = "0.1.0"
+description = ""
+authors = ["Juan Lee <me@juany.kr>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pymongo = "^4.12.0"
+fastapi = "^0.115.12"
+python-dotenv = "^1.1.0"
+uvicorn = "^0.34.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
