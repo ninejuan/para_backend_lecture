@@ -10,41 +10,46 @@ router = APIRouter(
 )
 
 @router.post('/create')
-async def create():
+async def create(article: Article):
     try:
-        return {}
+        board_id = boardService.create_board(article.model_dump())
+        return {"message": "게시글 생성 성공", "id": board_id}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.get('/get/all')
 async def getAll():
     try:
-        return {}
+        boards = boardService.get_all_boards()
+        return { "boards": boards }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@router.get('/get/')
-async def getArticle():
+@router.get('/get/{board_id}')
+async def getArticle(board_id):
     try:
-        return {}
+        board = boardService.get_board(board_id)
+        return { "board": board }
     except HTTPException:
         raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@router.put('/update/')
-async def updateArticle():
+@router.put('/update/{board_id}')
+async def updateArticle(board_id, article: Article):
     try:
-        return {}
+        updated = boardService.update_board(board_id, article.model_dump())
+        return { "message": "게시글 업데이트 성공", "updated": updated }
     except HTTPException:
         raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@router.delete('/delete/')
-async def deleteArticle():
+@router.delete('/delete/{board_id}')
+async def deleteArticle(board_id):
     try:
-        return {}
+        deleted = boardService.delete_board(board_id)
+        return { "message": "게시글 삭제 성공", "deleted": deleted }
     except HTTPException:
         raise
     except Exception as e:
